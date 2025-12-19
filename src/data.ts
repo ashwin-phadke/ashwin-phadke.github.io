@@ -3,7 +3,7 @@ import type { ProfileData } from './types';
 
 export const PROFILE_DATA: ProfileData = {
     name: "Ashwin Phadke",
-    title: "Building Ai for the legal industry",
+    title: "Building AI for the legal industry",
     avatarUrl: "/profile.jpeg",
     email: "ashwinphadke12@rediffmail.com",
     socials: {
