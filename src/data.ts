@@ -112,6 +112,7 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
             roles: [
                 {
                     role: "Senior Manager, AI and Machine Learning",
+                    location: "Pune, Maharashtra, India",
                     period: "Jul 2025 - Present",
                     description: [
                         "Description to be added."
@@ -119,6 +120,7 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
                 },
                 {
                     role: "Senior Machine Learning Engineer",
+                    location: "Houston, TX",
                     period: "Feb 2024 - Jul 2025",
                     description: [
                         "Description to be added."
@@ -128,6 +130,7 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
         },
         {
             company: "Amazon",
+            location: "Austin, TX",
             role: "Software Development Engineer",
             period: "Jul 2022 - Jan 2024",
             description: [
@@ -140,6 +143,7 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
         },
         {
             company: "Strayos",
+            location: "Buffalo, NY",
             role: "Computer Vision Engineer Intern",
             period: "Jan 2022 - May 2022",
             description: [
@@ -149,6 +153,7 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
         },
         {
             company: "The State University of New York",
+            location: "Buffalo, NY",
             role: "Senior Research Aide",
             period: "Jul 2021 - Nov 2021",
             description: [
@@ -158,6 +163,7 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
         },
         {
             company: "University at Buffalo",
+            location: "Buffalo, NY",
             role: "Graduate Research Assistant",
             period: "Mar 2021 - Nov 2021",
             description: [
@@ -172,6 +178,7 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
             roles: [
                 {
                     role: "AI and Deep Learning Engineer",
+                    location: "Mumbai, Maharashtra, India",
                     period: "June 2019 — Nov 2019",
                     description: [
                         "Managed a team of 4 AI Engineers.",
@@ -181,6 +188,7 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
                 },
                 {
                     role: "Junior Engineer - AI",
+                    location: "Mumbai, Maharashtra, India",
                     period: "Aug 2018 — June 2019",
                     description: [
                         "Design, Implemented and supervised the development of computer vision and machine learning algorithms for products using neural networks.",
@@ -194,26 +202,40 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
               
     ],
     volunteer: [
+        {
+            company: "Blackstone Launchpad",
+            location: "Remote",
+            role: "Startup Mentor",
+            period: "Ongoing",
+            description: [
+                "Mentoring 25+ early-stage startups, guiding founders through product development lifecycles and market entry strategies.",
+                "Providing strategic technical oversight on product architecture and design to accelerate growth and innovation."
+            ]
+        },
          {
             company: "Habitat for Humanity",
+            location: "Austin, TX",
             role: "Volunteer",
             period: "Summer 2023",
             description: "Volunteered at Habitat for Humanity to help build homes for families in need with my office collegaues."
         },
          {
             company: "Buffalo History Museum",
+            location: "Buffalo, NY",
             role: "Volunteer Facilitator",
             period: "summer 2021",
             description: "Volunteered at the Buffalo History Museum as a facilitator for ehxibits and information assistance for children. Also engaged in activites to help children learn and grow their imagination about our solar system and the universe by having them draw their imaginary worlds"
         },
         {
             company: "Rotaract Club",
+            location: "Pune, Maharashtra, India",
             role: "Director of Professional Development",
             period: "Present",
             description: "As a part of social responsibility, I volunteer in organizations like Rotary as a director of professional development."
         },
         {
-            company: "Mozilla",
+            company: "Mozilla Campus Club",
+            location: "Pune, Maharashtra, India",
             role: "Regional Coordinator",
             period: "Jan 2017 — June 2018",
             description: [
@@ -223,7 +245,86 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
         }
     ],
     testimonials: [],
-    talks: [],
+    talks: [
+         {
+            title: "You get an LLM, you get an LLM, everyone gets an LLM, but does it work?",
+            event: "Tech Talk",
+            date: "April 2024",
+            link: "https://www.conf42.com/Large_Language_Models_LLMs_2024_Ashwin_Phadke_llm_work_everyone"
+        },
+         {
+            title: "AI in Security and Retail",
+            event: "Tech Talk",
+            date: "April 2019",
+            link: "https://github.com/ashwin-phadke/My-Talks-and-Presentations/blob/dac9859a9bd399f712a86aa2a561baaa900a1784/Computer%20Vision%20and%20Machine%20Learning/Published%20-%20AI%20in%20Retail%20and%20Cyber%20Security.pdf"
+        },
+        {
+            title: "Introduction to Recommendation System",
+            event: "Tech Talk",
+            date: "Jan 2020",
+            link: "https://github.com/ashwin-phadke/My-Talks-and-Presentations/blob/dac9859a9bd399f712a86aa2a561baaa900a1784/AI%20and%20ML%20in%20Open%20Source/Recommendation%20Systems.pdf"
+        },
+        {
+            title: "Analyzing model performance using TensorFlow Profiler.",
+            event: "Tech Talk",
+            date: "Oct 2020",
+            link: "https://speakerdeck.com/ashwinphadke12/analyzing-model-performance-using-tensorflow-profiler"
+        },
+        {
+            title: "Introduction to Keras Tuner with Tensorflow",
+            event: "Webinar",
+            date: "Jul 2020",
+            link: "https://speakerdeck.com/ashwinphadke12/introduction-to-keras-tuner-with-tensorflow"
+        },
+        {
+            title: "Introduction to deep learning with TensorFlow",
+            event: "Technical Presentation",
+            date: "Jun 2020",
+            link: "https://speakerdeck.com/ashwinphadke12/introduction-to-deep-learning-with-tensorflow"
+        },
+        {
+            title: "Workshop on AI and Open Source",
+            event: "Workshop",
+            date: "Jan 2020",
+            link: "https://speakerdeck.com/ashwinphadke12/workshop-on-ai-and-open-source-5af89c81-4fd1-459e-aa20-2f3687a8cafe"
+        },
+        {
+            title: "Improve inference on edge devices using TensorRT and TFLite",
+            event: "Tech Conference",
+            date: "Dec 2019",
+            link: "https://speakerdeck.com/ashwinphadke12/improve-inference-on-edge-devices-using-tensorrt-and-tflite"
+        },
+        {
+            title: "AI and Computer Vision in Security and Retail.",
+            event: "Industrial Presentation",
+            date: "Feb 2019",
+            link: "https://speakerdeck.com/ashwinphadke12/ai-and-computer-vision-in-security-and-retail"
+        },
+        {
+            title: "Introduction to Computer Vision",
+            event: "Lecture",
+            date: "Nov 2018",
+            link: "https://speakerdeck.com/ashwinphadke12/introduction-to-computer-vision"
+        },
+        {
+            title: "Cyber World Awareness",
+            event: "Community Talk",
+            date: "Nov 2018",
+            link: "https://speakerdeck.com/ashwinphadke12/cyber-world-awareness"
+        },
+        {
+            title: "Cyber Security 101",
+            event: "Introductory Session",
+            date: "Oct 2018",
+            link: "https://speakerdeck.com/ashwinphadke12/cyber-security-101"
+        },
+        {
+            title: "Dive into the Open Source Universe",
+            event: "Mozilla Community",
+            date: "Aug 2018",
+            link: "https://speakerdeck.com/ashwinphadke12/dive-into-the-open-source-universe"
+        }
+    ],
     blogPosts: [
         {
             id: 1,

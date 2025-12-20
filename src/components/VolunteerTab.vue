@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { MapPin } from 'lucide-vue-next';
 import type { VolunteerExperience } from '../types';
 
 defineProps<{
@@ -15,7 +16,13 @@ defineProps<{
                 <h3 class="text-xl font-bold">{{ role.company }}</h3>
                 <span class="text-neutral-400 font-mono text-sm">{{ role.period }}</span>
             </div>
-            <h4 class="text-lg text-neutral-500 mb-4">{{ role.role }}</h4>
+            <div class="flex items-baseline gap-2 mb-4">
+                <h4 class="text-lg text-neutral-500 leading-none">{{ role.role }}</h4>
+                <div v-if="role.location" class="flex items-center gap-1 text-neutral-500 dark:text-neutral-400 text-sm">
+                    <MapPin :size="12" class="translate-y-[1px]" />
+                    <span>{{ role.location }}</span>
+                </div>
+            </div>
             <div v-if="Array.isArray(role.description)" class="space-y-2">
                 <ul class="list-disc list-inside text-neutral-600 dark:text-neutral-400 max-w-2xl space-y-1">
                     <li v-for="(point, i) in role.description" :key="i">{{ point }}</li>

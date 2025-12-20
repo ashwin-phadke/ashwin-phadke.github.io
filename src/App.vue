@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import {
     User,
     Briefcase,
     BookOpen,
     Mail,
     Code2,
-    Heart
+    Heart,
+    Mic
 } from 'lucide-vue-next';
 import Header from './components/Header.vue';
 import Navigation from './components/Navigation.vue';
@@ -15,6 +16,7 @@ import WorkTab from './components/WorkTab.vue';
 import ExperienceTab from './components/ExperienceTab.vue';
 import VolunteerTab from './components/VolunteerTab.vue';
 import BlogTab from './components/BlogTab.vue';
+import TalksTab from './components/TalksTab.vue';
 import ContactTab from './components/ContactTab.vue';
 import Footer from './components/Footer.vue';
 import { PROFILE_DATA } from './data';
@@ -33,13 +35,41 @@ const navItems = [
     { id: 'experience', icon: Briefcase, label: 'Career' },
     { id: 'volunteer', icon: Heart, label: 'Volunteer' },
     { id: 'blog', icon: BookOpen, label: 'Blog' },
+    { id: 'talks', icon: Mic, label: 'Talks' },
     { id: 'contact', icon: Mail, label: 'Contact' }
 ];
 
+const updateGA = (tabId: string) => {
+    const item = navItems.find(n => n.id === tabId);
+    if (!item) return;
+
+    // Update document title
+    document.title = `${item.label} | ${PROFILE_DATA.name}`;
+
+    // Track page view in GA
+    if (typeof window.gtag === 'function') {
+        window.gtag('config', 'UA-103783670-1', {
+            'page_title': `${item.label} | ${PROFILE_DATA.name}`,
+            'page_path': `/#${tabId}`
+        });
+    }
+};
+
 const handleNavClick = (id: string) => {
     activeTab.value = id;
+    window.location.hash = id;
+    updateGA(id);
     window.scrollTo(0, 0);
 };
+
+onMounted(() => {
+    // Handle initial load with hash
+    const hash = window.location.hash.replace('#', '');
+    if (hash && navItems.some(n => n.id === hash)) {
+        activeTab.value = hash;
+    }
+    updateGA(activeTab.value);
+});
 </script>
 
 <template>
@@ -74,6 +104,9 @@ const handleNavClick = (id: string) => {
 
                             <!-- Blog Tab -->
                             <BlogTab v-if="activeTab === 'blog'" :posts="PROFILE_DATA.blogPosts" />
+
+                            <!-- Talks Tab -->
+                            <TalksTab v-if="activeTab === 'talks'" :talks="PROFILE_DATA.talks" />
 
                             <!-- Contact Tab -->
                             <ContactTab v-if="activeTab === 'contact'" :email="PROFILE_DATA.email" />

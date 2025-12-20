@@ -7,6 +7,7 @@ export interface Project {
 
 export interface Experience {
   company: string;
+  location?: string;
   role?: string;
   period?: string;
   description?: string | string[];
@@ -14,6 +15,7 @@ export interface Experience {
     role: string;
     period: string;
     description: string | string[];
+    location?: string;
   }[];
 }
 
@@ -27,6 +29,7 @@ export interface Talk {
   title: string;
   event: string;
   link: string;
+  date?: string;
 }
 
 export interface BlogPost {
@@ -61,6 +64,7 @@ export interface ProfileData {
 
 export interface VolunteerExperience {
   company: string;
+  location?: string;
   role: string;
   period: string;
   description: string | string[];
