@@ -13,15 +13,11 @@ export const PROFILE_DATA: ProfileData = {
     },
     skills: ["Natural Language Processing", "Language models", "Computer Vision", "Deep Learning"],
     about: `
-  With over 5+ years of experience in the fields of Deep learning, Computer Vision, Data Science and analytics, machine learning algorithms, and software development it has always been my priority to build scalable products.
+I am a Senior AI and Machine Learning Engineer with over 5 years of experience in building scalable, high-impact solutions across the legal, e-commerce, and autonomous systems sectors. Currently, I am focused on leveraging Large Language Models (LLMs) and advanced Natural Language Processing to revolutionize the legal industry.
 
-I've always been keen on developing efficient products and staying up-to-date with the latest trends and technologies that help me utilize and update my skills.
+My expertise spans the full AI lifecycle—from researching and developing state-of-the-art Deep Learning and Computer Vision algorithms to deploying robust, production-ready microservices. I have a proven track record of delivering efficiency and innovation, having previously developed critical infrastructure at Amazon and led computer vision initiatives for autonomous vehicle research.
 
-I believe in sharing valuable knowledge and insights in fostering mutual growth and success helping to be inclusive in every aspects of the organization.
-Be it coding new solutions or meeting new people , I believe in utilizing my time efficiently which helps me stay in check.
-
-I am also keen on putting my skills to use for the society by speaking at conferences and tech meetups on Deep Learning , Computer Vision , Artificial Intelligence, Data science technologies and also following my passion by speaking for open web, privacy and security and contribubting towards open source projects. 
-As a part of social responsibility, I volunteer in organizations like Rotary as a director of professional development. `,
+Beyond technical development, I am deeply committed to the tech community. I actively contribute to open-source projects, speak at international conferences on topics ranging from AI ethics to privacy, and mentor early-stage startups. I believe in technology as a force for good and strive to foster inclusive, growth-oriented environments wherever I work.`,
     projects: [
         // Repositories
         {
