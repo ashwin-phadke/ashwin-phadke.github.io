@@ -230,7 +230,7 @@ As a part of social responsibility, I volunteer in organizations like Rotary as 
             company: "Rotaract Club",
             location: "Pune, Maharashtra, India",
             role: "Director of Professional Development",
-            period: "Present",
+            period: "2017-2019",
             description: "As a part of social responsibility, I volunteer in organizations like Rotary as a director of professional development."
         },
         {
