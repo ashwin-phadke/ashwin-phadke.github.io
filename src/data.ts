@@ -22,37 +22,37 @@ Beyond technical development, I am deeply committed to the tech community. I act
         // Repositories
         {
             title: "implementations-and-guides",
-            description: "A repository for documenting the steps and code for implementation on various computer vision programs and techniques.",
+            description: "Comprehensive guide and implementations for various computer vision techniques and algorithms.",
             tags: ["Repository", "Jupyter Notebook"],
             link: "https://github.com/ashwin-phadke/implementations-and-guides"
         },
         {
             title: "cvplayground",
-            description: "A computer vision playground to try and test end to end(test to deploy) computer vision pipeline.",
+            description: "An end-to-end computer vision playground designed for testing and deploying computer vision pipelines.",
             tags: ["Repository", "Python"],
             link: "https://github.com/ashwin-phadke/cvplayground"
         },
         {
             title: "My-Talks-and-Presentations",
-            description: "Complete set of tools and presentation and talks given at various seminars and conferences.",
+            description: "A curated collection of tools, presentations, and talks delivered at various international seminars and conferences.",
             tags: ["Repository", "Jupyter Notebook"],
             link: "https://github.com/ashwin-phadke/My-Talks-and-Presentations"
         },
         {
             title: "Real-Time-Object-Detection-Recognition",
-            description: "Code for realtime object detection and recognition. The model is trained on caffe and uses OpenCV.",
+            description: "Real-time object detection and recognition system trained on Caffe and implemented using OpenCV.",
             tags: ["Repository", "Python"],
             link: "https://github.com/ashwin-phadke/Real-Time-Object-Detection-Recognition"
         },
         {
             title: "Face-Recognition-using-Python-OpenCV",
-            description: "Real Time face recognition using OpenCV and Python.",
+            description: "Real-time face recognition application built with OpenCV and Python.",
             tags: ["Repository", "Python"],
             link: "https://github.com/ashwin-phadke/Face-Recognition-using-Python-OpenCV"
         },
         {
             title: "aframeVRGameDesign",
-            description: "VR game developed to create awareness among citizens for preventing cyberattacks.",
+            description: "A VR game designed to raise awareness about cyberattacks and prevention methods.",
             tags: ["Repository", "HTML", "VR"],
             link: "https://github.com/ashwin-phadke/aframeVRGameDesign"
         },
@@ -213,14 +213,14 @@ Beyond technical development, I am deeply committed to the tech community. I act
             location: "Austin, TX",
             role: "Volunteer",
             period: "Summer 2023",
-            description: "Volunteered at Habitat for Humanity to help build homes for families in need with my office collegaues."
+            description: "Volunteered at Habitat for Humanity to help build homes for families in need with my office colleagues."
         },
          {
             company: "Buffalo History Museum",
             location: "Buffalo, NY",
             role: "Volunteer Facilitator",
-            period: "summer 2021",
-            description: "Volunteered at the Buffalo History Museum as a facilitator for ehxibits and information assistance for children. Also engaged in activites to help children learn and grow their imagination about our solar system and the universe by having them draw their imaginary worlds"
+            period: "Summer 2021",
+            description: "Volunteered at the Buffalo History Museum as a facilitator for exhibits and information assistance for children. Also engaged in activities to help children learn and grow their imagination about our solar system and the universe by having them draw their imaginary worlds"
         },
         {
             company: "Rotaract Club",
