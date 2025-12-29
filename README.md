@@ -62,6 +62,13 @@ npm run preview
 - Modify components in `src/components/` to adjust the layout or design.
 - Update `index.html` for SEO and meta tags.
 
+## Credits
+
+This theme was created using **Antigravity** and dozens of prompts carried out on:
+- **Gemini 3 Pro**
+- **Gemini 3 Flash**
+
+
 ## License
 
 [MIT](LICENSE)
