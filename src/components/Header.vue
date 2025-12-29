@@ -29,10 +29,6 @@ defineEmits<{
                         <img :src="profile.avatarUrl" :alt="profile.name"
                             class="w-full h-full object-cover transition-all duration-700" />
                     </div>
-                    <div
-                        class="absolute -bottom-2 -right-2 bg-white dark:bg-neutral-800 p-2 rounded-full border border-neutral-200 dark:border-neutral-700 shadow-md">
-                        <Sparkles :size="16" class="text-yellow-500" />
-                    </div>
                 </div>
 
                 <div>
