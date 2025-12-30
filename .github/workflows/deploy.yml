@@ -27,6 +27,9 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm install
+      # ADD THIS STEP
+      - name: Inject Sensitive Data
+        run: echo "${{ secrets.DATA_SENSITIVE_FILE }}" > src/data.sensitive.ts  
       - name: Build
         run: npm run build
       - name: Setup Pages

@@ -25,3 +25,6 @@ dist-ssr
 
 # Vite
 *.tsbuildinfo
+
+# Sensitive Data
+src/data.sensitive.ts
