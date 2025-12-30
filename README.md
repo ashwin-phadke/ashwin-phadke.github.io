@@ -62,6 +62,33 @@ npm run preview
 - Modify components in `src/components/` to adjust the layout or design.
 - Update `index.html` for SEO and meta tags.
 
+
+## Sensitive Data Configuration
+
+To protect personal information, the main profile data is stored in `src/data.sensitive.ts`, which is **excluded from version control** (via `.gitignore`).
+
+- **`src/data.sensitive.ts`**: Contains the actual `PROFILE_DATA`. Create this file locally for development.
+- **`src/data.sensitive.example.ts`**: A template file. Copy this to `src/data.sensitive.ts` to get started.
+
+### CI/CD Setup (GitHub Actions)
+
+To build the project in a CI environment, you must inject the sensitive data file at build time.
+
+1. **Create a Repository Secret**:
+   - Go to **Settings** > **Secrets and variables** > **Actions**.
+   - Create a new secret named `DATA_SENSITIVE_FILE`.
+   - Paste the **entire content** of your local `src/data.sensitive.ts`.
+
+2. **Workflow Configuration**:
+   The workflow uses an environment variable to safely inject the file content. Ensure your `.github/workflows/deploy.yml` includes:
+
+   ```yaml
+   - name: Inject Sensitive Data
+     env:
+       DATA_SENSITIVE: ${{ secrets.DATA_SENSITIVE_FILE }}
+     run: echo "$DATA_SENSITIVE" > src/data.sensitive.ts
+   ```
+
 ## Credits
 
 This theme was created using **Antigravity** and dozens of prompts carried out on:
