@@ -29,7 +29,9 @@ jobs:
         run: npm install
       # ADD THIS STEP
       - name: Inject Sensitive Data
-        run: echo "${{ secrets.DATA_SENSITIVE_FILE }}" > src/data.sensitive.ts  
+        env:
+          DATA_SENSITIVE: ${{ secrets.DATA_SENSITIVE_FILE }}
+        run: echo "$DATA_SENSITIVE" > src/data.sensitive.ts  
       - name: Build
         run: npm run build
       - name: Setup Pages
