@@ -7,7 +7,8 @@ import {
     Mail,
     Code2,
     Heart,
-    Mic
+    Mic,
+    Award
 } from 'lucide-vue-next';
 import Header from './components/Header.vue';
 import Navigation from './components/Navigation.vue';
@@ -15,6 +16,7 @@ import AboutTab from './components/AboutTab.vue';
 import WorkTab from './components/WorkTab.vue';
 import ExperienceTab from './components/ExperienceTab.vue';
 import VolunteerTab from './components/VolunteerTab.vue';
+import AwardsTab from './components/AwardsTab.vue';
 import BlogTab from './components/BlogTab.vue';
 import TalksTab from './components/TalksTab.vue';
 import ContactTab from './components/ContactTab.vue';
@@ -34,6 +36,7 @@ const navItems = [
     { id: 'work', icon: Code2, label: 'Work' },
     { id: 'experience', icon: Briefcase, label: 'Career' },
     { id: 'volunteer', icon: Heart, label: 'Volunteer' },
+    { id: 'awards', icon: Award, label: 'Achievements' },
     { id: 'blog', icon: BookOpen, label: 'Blog' },
     { id: 'talks', icon: Mic, label: 'Talks' },
     { id: 'contact', icon: Mail, label: 'Contact' }
@@ -101,6 +104,9 @@ onMounted(() => {
 
                             <!-- Volunteer Tab -->
                             <VolunteerTab v-if="activeTab === 'volunteer'" :volunteer="PROFILE_DATA.volunteer" />
+
+                            <!-- Awards Tab -->
+                            <AwardsTab v-if="activeTab === 'awards'" :awards="PROFILE_DATA.awards" />
 
                             <!-- Blog Tab -->
                             <BlogTab v-if="activeTab === 'blog'" :posts="PROFILE_DATA.blogPosts" />

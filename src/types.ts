@@ -46,6 +46,14 @@ export interface Socials {
   linkedin: string;
 }
 
+export interface Award {
+  title: string;
+  date: string;
+  issuer: string;
+  description?: string;
+  link?: string;
+}
+
 export interface ProfileData {
   name: string;
   title: string;
@@ -60,6 +68,7 @@ export interface ProfileData {
   talks: Talk[];
   blogPosts: BlogPost[];
   volunteer: VolunteerExperience[];
+  awards: Award[];
 }
 
 export interface VolunteerExperience {

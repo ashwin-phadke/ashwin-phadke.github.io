@@ -195,7 +195,7 @@ Beyond technical development, I am deeply committed to the tech community. I act
                 }
             ]
         },
-              
+
     ],
     volunteer: [
         {
@@ -208,14 +208,14 @@ Beyond technical development, I am deeply committed to the tech community. I act
                 "Providing strategic technical oversight on product architecture and design to accelerate growth and innovation."
             ]
         },
-         {
+        {
             company: "Habitat for Humanity",
             location: "Austin, TX",
             role: "Volunteer",
             period: "Summer 2023",
             description: "Volunteered at Habitat for Humanity to help build homes for families in need with my office colleagues."
         },
-         {
+        {
             company: "Buffalo History Museum",
             location: "Buffalo, NY",
             role: "Volunteer Facilitator",
@@ -240,15 +240,35 @@ Beyond technical development, I am deeply committed to the tech community. I act
             ]
         }
     ],
+    awards: [
+        {
+            title: "3rd Position: State Level Undergraduate engineering project competition",
+            date: "2018",
+            issuer: "IEEE, IETE, P.E.S Modern College of Engineering",
+            description: "Built and showcased a fully automated three level secured bank locker system with biometric authentication and real time tracking using GPS and GSM. Police, Bank alert portals with accessible web and mobile interfaces."
+        },
+        {
+            title: "Finalist: Smart India Hackathon",
+            date: "2017",
+            issuer: "Govt. of India, AICTE",
+            description: "Finalist in Smart India Hackathon under Ministry Of Electronics & Information Technology to develop a system for nationwide healthcare data management tied to national digital identity number."
+        },
+        {
+            title: "Winner : I2I - Develop a Village",
+            date: "2016",
+            issuer: "COEP, BHAU Institute",
+            description: "Developing an entire village in terms of infrastructure, education, health and sanitation with a enthusiastic group of students and teachers"
+        }
+    ],
     testimonials: [],
     talks: [
-         {
+        {
             title: "You get an LLM, you get an LLM, everyone gets an LLM, but does it work?",
             event: "Tech Talk",
             date: "April 2024",
             link: "https://www.conf42.com/Large_Language_Models_LLMs_2024_Ashwin_Phadke_llm_work_everyone"
         },
-         {
+        {
             title: "AI in Security and Retail",
             event: "Tech Talk",
             date: "April 2019",
