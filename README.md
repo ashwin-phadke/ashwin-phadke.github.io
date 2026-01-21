@@ -58,7 +58,7 @@ npm run preview
 
 ## Customization
 
-- Update `src/data.ts` to change the content (Profile, Timeline, Projects, etc.).
+- Update `src/data.sensitive.ts` to change the content (Profile, Timeline, Projects, etc.) and update it in your github action repository secrets as well.
 - Modify components in `src/components/` to adjust the layout or design.
 - Update `index.html` for SEO and meta tags.
 
