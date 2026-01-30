@@ -58,6 +58,7 @@ const updateGA = (tabId: string) => {
     }
 };
 
+// Handle navigation
 const handleNavClick = (id: string) => {
     activeTab.value = id;
     window.location.hash = id;
