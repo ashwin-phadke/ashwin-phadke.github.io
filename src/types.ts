@@ -6,6 +6,7 @@ export interface Project {
   link: string;
 }
 
+/*Added interfaces*/
 export interface Experience {
   company: string;
   location?: string;
