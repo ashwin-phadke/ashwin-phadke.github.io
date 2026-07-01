@@ -27,5 +27,7 @@ export const PROFILE_DATA: ProfileData = {
     awards: awards,
     testimonials: [],
     talks: [],
-    blogPosts: []
+    blogPosts: [],
+    certificates: [],
+
 };
