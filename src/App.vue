@@ -107,7 +107,7 @@ onMounted(() => {
                             <VolunteerTab v-if="activeTab === 'volunteer'" :volunteer="PROFILE_DATA.volunteer" />
 
                             <!-- Awards Tab -->
-                            <AwardsTab v-if="activeTab === 'awards'" :awards="PROFILE_DATA.awards" />
+                            <AwardsTab v-if="activeTab === 'awards'" :awards="PROFILE_DATA.awards" :certificates="PROFILE_DATA.certificates" />
 
                             <!-- Blog Tab -->
                             <BlogTab v-if="activeTab === 'blog'" :posts="PROFILE_DATA.blogPosts" />

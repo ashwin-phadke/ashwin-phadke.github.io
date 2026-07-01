@@ -56,6 +56,13 @@ export interface Award {
   link?: string;
 }
 
+export interface Certificate {
+  title: string;
+  issuer: string;
+  date?: string;
+  link?: string;
+}
+
 export interface ProfileData {
   name: string;
   title: string;
@@ -71,6 +78,7 @@ export interface ProfileData {
   blogPosts: BlogPost[];
   volunteer: VolunteerExperience[];
   awards: Award[];
+  certificates: Certificate[];
 }
 
 export interface VolunteerExperience {
