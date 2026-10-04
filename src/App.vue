@@ -127,21 +127,3 @@ onMounted(() => {
         </div>
     </div>
 </template>
-
-<style>
-/* 
-  Tailwind's animate-in classes can sometimes be tricky without the specific plugin configuration 
-  or if the versions mismatch, but standard Tailwind classes are used here. 
-  "animate-in", "fade-in", "slide-in-from-bottom-4" are typical of 'tailwindcss-animate' plugin
-  which isn't strictly in my package.json, but often people alias them or use them in their config.
-  
-  The original component used them. If they aren't working, I might need to add `tailwindcss-animate`
-  or define keyframes. 
-  
-  Checking the original code: 
-  `className="animate-in fade-in slide-in-from-bottom-4 duration-700"`
-  
-  These are definitely `tailwindcss-animate` utility classes. 
-  I should add `tailwindcss-animate` to dependencies to ensure 1:1 visual match.
-*/
-</style>
