@@ -13,8 +13,8 @@ import {
 import Header from './components/Header.vue';
 import Navigation from './components/Navigation.vue';
 import AboutTab from './components/AboutTab.vue';
-import WorkTab from './components/WorkTab.vue';
 import ExperienceTab from './components/ExperienceTab.vue';
+import ProjectsTab from './components/ProjectsTab.vue';
 import VolunteerTab from './components/VolunteerTab.vue';
 import AwardsTab from './components/AwardsTab.vue';
 import BlogTab from './components/BlogTab.vue';
@@ -33,8 +33,8 @@ const toggleDarkMode = () => {
 
 const navItems = [
     { id: 'about', icon: User, label: 'About' },
-    { id: 'work', icon: Code2, label: 'Work' },
     { id: 'experience', icon: Briefcase, label: 'Career' },
+    { id: 'projects', icon: Code2, label: 'Projects' },
     { id: 'volunteer', icon: Heart, label: 'Volunteer' },
     { id: 'awards', icon: Award, label: 'Achievements' },
     { id: 'blog', icon: BookOpen, label: 'Blog' },
@@ -68,7 +68,8 @@ const handleNavClick = (id: string) => {
 
 onMounted(() => {
     // Handle initial load with hash
-    const hash = window.location.hash.replace('#', '');
+    const rawHash = window.location.hash.replace('#', '');
+    const hash = rawHash === 'work' ? 'projects' : rawHash;
     if (hash && navItems.some(n => n.id === hash)) {
         activeTab.value = hash;
     }
@@ -97,11 +98,11 @@ onMounted(() => {
                             <!-- About Tab -->
                             <AboutTab v-if="activeTab === 'about'" :profile="PROFILE_DATA" />
 
-                            <!-- Work Tab -->
-                            <WorkTab v-if="activeTab === 'work'" :projects="PROFILE_DATA.projects" />
-
-                            <!-- Experience Tab -->
+                            <!-- Experience (Career) Tab -->
                             <ExperienceTab v-if="activeTab === 'experience'" :experience="PROFILE_DATA.experience" />
+
+                            <!-- Projects Tab -->
+                            <ProjectsTab v-if="activeTab === 'projects'" :projects="PROFILE_DATA.projects" />
 
                             <!-- Volunteer Tab -->
                             <VolunteerTab v-if="activeTab === 'volunteer'" :volunteer="PROFILE_DATA.volunteer" />
