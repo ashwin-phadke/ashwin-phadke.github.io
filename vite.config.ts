@@ -1,5 +1,5 @@
-import { readdirSync } from 'node:fs'
-import { basename } from 'node:path'
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { basename, join } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { Marked } from 'marked'
@@ -53,12 +53,30 @@ function posts(): Plugin {
   }
 }
 
+const postFiles = () => readdirSync(POSTS_DIR).filter((file) => file.endsWith('.md'))
+
 const ssgOptions: ViteSSGOptions = {
   // One static page per post, so each has its own URL on GitHub Pages
   includedRoutes: (paths) => paths.flatMap((path) =>
     path === '/blog/:slug'
-      ? readdirSync(POSTS_DIR).filter((file) => file.endsWith('.md')).map((file) => `/blog/${basename(file, '.md')}`)
+      ? postFiles().map((file) => `/blog/${basename(file, '.md')}`)
       : path),
+  // List the home page and every post in sitemap.xml so search engines can find them
+  onFinished() {
+    const siteUrl = `https://${readFileSync('public/CNAME', 'utf8').trim()}`
+    const urls = [
+      `<url><loc>${siteUrl}/</loc></url>`,
+      ...postFiles().map((file) => {
+        const date = /^date:\s*(.+)$/m.exec(readFileSync(join(POSTS_DIR, file), 'utf8'))?.[1].trim()
+        const lastmod = date ? `<lastmod>${date}</lastmod>` : ''
+        return `<url><loc>${siteUrl}/blog/${basename(file, '.md')}</loc>${lastmod}</url>`
+      }),
+    ]
+    writeFileSync(
+      'dist/sitemap.xml',
+      `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`,
+    )
+  },
 }
 
 // https://vitejs.dev/config/
