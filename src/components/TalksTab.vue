@@ -37,11 +37,11 @@ const sortedTalks = computed(() => {
                         </div>
                     </div>
 
-                    <div
+                    <!-- <div
                         class="flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm font-medium border border-neutral-200 dark:border-neutral-700 group-hover:bg-neutral-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all w-fit">
                         <span>View Talk</span>
                         <ExternalLink :size="14" />
-                    </div>
+                    </div> -->
                 </div>
             </a>
         </div>
