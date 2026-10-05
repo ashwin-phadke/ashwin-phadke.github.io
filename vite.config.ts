@@ -1,8 +1,69 @@
-import { defineConfig } from 'vite'
+import { readdirSync } from 'node:fs'
+import { basename } from 'node:path'
+import { defineConfig, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { Marked } from 'marked'
+import { bundledLanguages, codeToHtml } from 'shiki'
+import type { ViteSSGOptions } from 'vite-ssg'
+
+const POSTS_DIR = 'src/posts'
+
+// Code blocks are highlighted here, at build time, so no highlighter ships to the browser
+const marked = new Marked({
+  gfm: true,
+  breaks: true,
+  async: true,
+  async walkTokens(token) {
+    if (token.type !== 'code') return
+    const requested = (token.lang ?? '').split(/\s+/)[0]
+    const lang = requested in bundledLanguages ? requested : 'text'
+    token.text = await codeToHtml(token.text, {
+      lang,
+      themes: { light: 'github-light', dark: 'github-dark' },
+    })
+  },
+  renderer: {
+    code: ({ text }) => text,
+  },
+})
+
+// Turns src/posts/<slug>.md into a module exporting the post's frontmatter and rendered HTML
+function posts(): Plugin {
+  return {
+    name: 'posts',
+    async transform(src, id) {
+      if (!id.endsWith('.md')) return
+
+      const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/.exec(src)
+      if (!match) return this.error(`${id}: missing frontmatter`)
+
+      const meta = Object.fromEntries(
+        match[1].split(/\r?\n/).filter(Boolean).map((line) => {
+          const colon = line.indexOf(':')
+          return [line.slice(0, colon).trim(), line.slice(colon + 1).trim()]
+        }),
+      )
+      for (const field of ['title', 'category', 'excerpt']) {
+        if (!meta[field]) return this.error(`${id}: frontmatter is missing "${field}"`)
+      }
+
+      const post = { slug: basename(id, '.md'), ...meta, html: await marked.parse(match[2]) }
+      return { code: `export default ${JSON.stringify(post)}`, map: null }
+    },
+  }
+}
+
+const ssgOptions: ViteSSGOptions = {
+  // One static page per post, so each has its own URL on GitHub Pages
+  includedRoutes: (paths) => paths.flatMap((path) =>
+    path === '/blog/:slug'
+      ? readdirSync(POSTS_DIR).filter((file) => file.endsWith('.md')).map((file) => `/blog/${basename(file, '.md')}`)
+      : path),
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), posts()],
   base: '/',
+  ssgOptions,
 })

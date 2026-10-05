@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Highlighted code blocks in blog posts: each token carries a light and a dark colour */
+.shiki {
+    @apply border border-neutral-200 dark:border-neutral-800;
+}
+
+.dark .shiki,
+.dark .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+}

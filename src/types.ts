@@ -35,11 +35,12 @@ export interface Talk {
 }
 
 export interface BlogPost {
-  id: number;
-  date: string;
+  slug: string;
   title: string;
+  category: string;
   excerpt: string;
-  content: string;
+  html: string;
+  date?: string;
 }
 
 export interface Socials {
@@ -75,7 +76,8 @@ export interface ProfileData {
   experience: Experience[];
   testimonials: Testimonial[];
   talks: Talk[];
-  blogPosts: BlogPost[];
+  /** @deprecated Posts now live in src/posts/*.md. Kept so an older data.sensitive.ts still builds. */
+  blogPosts?: unknown[];
   volunteer: VolunteerExperience[];
   awards: Award[];
   certificates: Certificate[];

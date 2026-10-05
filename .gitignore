@@ -28,3 +28,4 @@ dist-ssr
 
 # Sensitive Data
 src/data.sensitive.ts
+src/old.data

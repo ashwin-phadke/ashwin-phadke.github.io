@@ -1,127 +1,79 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import {
-    User,
-    Briefcase,
-    BookOpen,
-    Mail,
-    Code2,
-    Heart,
-    Mic,
-    Award
-} from 'lucide-vue-next';
+import { computed, ref, onMounted, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useHead } from '@unhead/vue';
 import Header from './components/Header.vue';
 import Navigation from './components/Navigation.vue';
-import AboutTab from './components/AboutTab.vue';
-import ExperienceTab from './components/ExperienceTab.vue';
-import ProjectsTab from './components/ProjectsTab.vue';
-import VolunteerTab from './components/VolunteerTab.vue';
-import AwardsTab from './components/AwardsTab.vue';
-import BlogTab from './components/BlogTab.vue';
-import TalksTab from './components/TalksTab.vue';
-import ContactTab from './components/ContactTab.vue';
 import Footer from './components/Footer.vue';
 import { PROFILE_DATA } from './data';
+import { navItems, useActiveTab } from './navigation';
+import { findPost } from './posts';
+
+const route = useRoute();
+const router = useRouter();
 
 // State
-const activeTab = ref('about');
-const isDarkMode = ref(window.matchMedia('(prefers-color-scheme: dark)').matches);
+const activeTab = useActiveTab();
+// The dark class is set on <html> by the inline script in index.html before first paint
+const isDarkMode = ref(false);
 
 const toggleDarkMode = () => {
     isDarkMode.value = !isDarkMode.value;
+    document.documentElement.classList.toggle('dark', isDarkMode.value);
 };
 
-const navItems = [
-    { id: 'about', icon: User, label: 'About' },
-    { id: 'experience', icon: Briefcase, label: 'Career' },
-    { id: 'projects', icon: Code2, label: 'Projects' },
-    { id: 'volunteer', icon: Heart, label: 'Volunteer' },
-    { id: 'awards', icon: Award, label: 'Achievements' },
-    { id: 'blog', icon: BookOpen, label: 'Blog' },
-    { id: 'talks', icon: Mic, label: 'Talks' },
-    { id: 'contact', icon: Mail, label: 'Contact' }
-];
+const pageTitle = computed(() => {
+    const post = route.name === 'post' ? findPost(String(route.params.slug)) : undefined;
+    const label = post?.title ?? navItems.find(n => n.id === activeTab.value)?.label;
+    return `${label} | ${PROFILE_DATA.name}`;
+});
 
-const updateGA = (tabId: string) => {
-    const item = navItems.find(n => n.id === tabId);
-    if (!item) return;
+useHead({ title: pageTitle });
 
-    // Update document title
-    document.title = `${item.label} | ${PROFILE_DATA.name}`;
-
+const updateGA = () => {
     // Track page view in GA
     if (typeof window.gtag === 'function') {
         window.gtag('config', 'UA-103783670-1', {
-            'page_title': `${item.label} | ${PROFILE_DATA.name}`,
-            'page_path': `/#${tabId}`
+            'page_title': pageTitle.value,
+            'page_path': route.name === 'post' ? route.path : `/#${activeTab.value}`
         });
     }
 };
 
 // Handle navigation
 const handleNavClick = (id: string) => {
-    activeTab.value = id;
-    window.location.hash = id;
-    updateGA(id);
-    window.scrollTo(0, 0);
+    router.push({ path: '/', hash: `#${id}` });
 };
 
 onMounted(() => {
-    // Handle initial load with hash
-    const rawHash = window.location.hash.replace('#', '');
-    const hash = rawHash === 'work' ? 'projects' : rawHash;
-    if (hash && navItems.some(n => n.id === hash)) {
-        activeTab.value = hash;
-    }
-    updateGA(activeTab.value);
+    isDarkMode.value = document.documentElement.classList.contains('dark');
+    updateGA();
 });
+
+watch(() => route.fullPath, updateGA, { flush: 'post' });
 </script>
 
 <template>
-    <div :class="isDarkMode ? 'dark' : ''">
-        <div
-            class="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 selection:bg-neutral-200 dark:selection:bg-neutral-800 transition-colors duration-500">
-            <div class="max-w-7xl mx-auto px-6 py-12 md:py-24">
-                <div class="lg:grid lg:grid-cols-12 lg:gap-12 lg:items-start">
-                    <!-- Sidebar (Header) -->
-                    <div class="lg:col-span-3 lg:sticky lg:top-24 mb-12 lg:mb-0">
-                        <Header :profile="PROFILE_DATA" :is-dark-mode="isDarkMode" @toggle-theme="toggleDarkMode" />
-                    </div>
+    <div
+        class="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 selection:bg-neutral-200 dark:selection:bg-neutral-800 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6 py-12 md:py-24">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-12 lg:items-start">
+                <!-- Sidebar (Header) -->
+                <div class="lg:col-span-3 lg:sticky lg:top-24 mb-12 lg:mb-0">
+                    <Header :profile="PROFILE_DATA" :is-dark-mode="isDarkMode" @toggle-theme="toggleDarkMode" />
+                </div>
 
-                    <!-- Main Content -->
-                    <div class="lg:col-span-9">
-                        <!-- Navigation -->
-                        <Navigation :active-tab="activeTab" :nav-items="navItems" @nav-click="handleNavClick" />
+                <!-- Main Content -->
+                <div class="lg:col-span-9">
+                    <!-- Navigation -->
+                    <Navigation :active-tab="activeTab" :nav-items="navItems" @nav-click="handleNavClick" />
 
-                        <!-- Content Area -->
-                        <main class="min-h-[500px]">
-                            <!-- About Tab -->
-                            <AboutTab v-if="activeTab === 'about'" :profile="PROFILE_DATA" />
+                    <!-- Content Area -->
+                    <main class="min-h-[500px]">
+                        <RouterView />
+                    </main>
 
-                            <!-- Experience (Career) Tab -->
-                            <ExperienceTab v-if="activeTab === 'experience'" :experience="PROFILE_DATA.experience" />
-
-                            <!-- Projects Tab -->
-                            <ProjectsTab v-if="activeTab === 'projects'" :projects="PROFILE_DATA.projects" />
-
-                            <!-- Volunteer Tab -->
-                            <VolunteerTab v-if="activeTab === 'volunteer'" :volunteer="PROFILE_DATA.volunteer" />
-
-                            <!-- Awards Tab -->
-                            <AwardsTab v-if="activeTab === 'awards'" :awards="PROFILE_DATA.awards" :certificates="PROFILE_DATA.certificates" />
-
-                            <!-- Blog Tab -->
-                            <BlogTab v-if="activeTab === 'blog'" :posts="PROFILE_DATA.blogPosts" />
-
-                            <!-- Talks Tab -->
-                            <TalksTab v-if="activeTab === 'talks'" :talks="PROFILE_DATA.talks" />
-
-                            <!-- Contact Tab -->
-                            <ContactTab v-if="activeTab === 'contact'" :email="PROFILE_DATA.email" />
-                        </main>
-
-                        <Footer :name="PROFILE_DATA.name" />
-                    </div>
+                    <Footer :name="PROFILE_DATA.name" />
                 </div>
             </div>
         </div>

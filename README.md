@@ -16,6 +16,8 @@ This is a personal portfolio website built with Vue 3, TypeScript, and Vite. It 
 - `src/components/`: Contains the Vue components for different sections of the portfolio (About, Experience, Work, etc.).
 - `src/data.ts`: Contains the static data for the portfolio content.
 - `src/types.ts`: TypeScript interfaces for the data structures.
+- `src/posts/`: Blog posts, one Markdown file per post. The file name is the post URL (`src/posts/my-post.md` is served at `/blog/my-post`).
+- `src/views/`: The home page (tabs) and the blog post page.
 - `src/App.vue`: The main application component.
 
 ## Getting Started
@@ -55,6 +57,23 @@ To preview the production build locally:
 ```bash
 npm run preview
 ```
+
+## Writing a Blog Post
+
+Add a Markdown file to `src/posts/` starting with this block (`date` is optional):
+
+```markdown
+---
+title: My post title
+date: 2026-01-31
+category: Machine Learning
+excerpt: One or two sentences shown in the post list and in link previews.
+---
+
+Post content in Markdown. Fenced code blocks with a language are syntax highlighted.
+```
+
+The build pre-renders each post to its own static page using [vite-ssg](https://github.com/antfu-collective/vite-ssg).
 
 ## Customization
 
