@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { Mic, ExternalLink, Calendar } from 'lucide-vue-next';
+import { Mic, Calendar } from 'lucide-vue-next';
 import type { Talk } from '../types';
 
 const props = defineProps<{ talks: Talk[]; }>();
