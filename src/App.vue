@@ -57,6 +57,7 @@ watch(() => route.fullPath, updateGA, { flush: 'post' });
     <div
         class="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 selection:bg-neutral-200 dark:selection:bg-neutral-800 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-6 py-12 md:py-24">
+        <!-- Layout -->
             <div class="lg:grid lg:grid-cols-12 lg:gap-12 lg:items-start">
                 <!-- Sidebar (Header) -->
                 <div class="lg:col-span-3 lg:sticky lg:top-24 mb-12 lg:mb-0">
