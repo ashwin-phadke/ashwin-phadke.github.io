@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, watch } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useHead } from '@unhead/vue';
 import Header from './components/Header.vue';
@@ -30,16 +30,6 @@ const pageTitle = computed(() => {
 
 useHead({ title: pageTitle });
 
-const updateGA = () => {
-    // Track page view in GA
-    if (typeof window.gtag === 'function') {
-        window.gtag('config', 'UA-103783670-1', {
-            'page_title': pageTitle.value,
-            'page_path': route.name === 'post' ? route.path : `/#${activeTab.value}`
-        });
-    }
-};
-
 // Handle navigation
 const handleNavClick = (id: string) => {
     router.push({ path: '/', hash: `#${id}` });
@@ -47,10 +37,7 @@ const handleNavClick = (id: string) => {
 
 onMounted(() => {
     isDarkMode.value = document.documentElement.classList.contains('dark');
-    updateGA();
 });
-
-watch(() => route.fullPath, updateGA, { flush: 'post' });
 </script>
 
 <template>
