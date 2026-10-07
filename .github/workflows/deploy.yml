@@ -23,11 +23,10 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 'lts/*'
           cache: 'npm'
       - name: Install dependencies
-        run: npm install
-      # ADD THIS STEP
+        run: npm ci
       - name: Inject Sensitive Data
         env:
           DATA_SENSITIVE: ${{ secrets.DATA_SENSITIVE_FILE }}

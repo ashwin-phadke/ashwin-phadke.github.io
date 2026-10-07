@@ -5,8 +5,9 @@ import { useHead } from '@unhead/vue';
 import Header from './components/Header.vue';
 import Navigation from './components/Navigation.vue';
 import Footer from './components/Footer.vue';
-import { PROFILE_DATA } from './data';
-import { navItems, useActiveTab } from './navigation';
+import ConsentBanner from './components/ConsentBanner.vue';
+import { PROFILE_DATA, SITE_URL } from './data';
+import { navItems, pathForLegacyHash, useActiveTab } from './navigation';
 import { findPost } from './posts';
 
 const route = useRoute();
@@ -20,23 +21,39 @@ const isDarkMode = ref(false);
 const toggleDarkMode = () => {
     isDarkMode.value = !isDarkMode.value;
     document.documentElement.classList.toggle('dark', isDarkMode.value);
+    // Read back by the inline script in index.html; storage can be blocked, e.g. in private windows
+    try {
+        localStorage.setItem('theme', isDarkMode.value ? 'dark' : 'light');
+    } catch { }
 };
 
 const pageTitle = computed(() => {
     const post = route.name === 'post' ? findPost(String(route.params.slug)) : undefined;
     const label = post?.title ?? navItems.find(n => n.id === activeTab.value)?.label;
-    return `${label} | ${PROFILE_DATA.name}`;
+    return `${label ?? 'Page not found'} | ${PROFILE_DATA.name}`;
 });
 
-useHead({ title: pageTitle });
+// Left out on the 404 page, which has no address of its own
+const pageUrl = computed(() => route.name === 'not-found' ? undefined : `${SITE_URL}${route.path}`);
 
-// Handle navigation
-const handleNavClick = (id: string) => {
-    router.push({ path: '/', hash: `#${id}` });
-};
+// Link-preview tags for every page; PostView overrides the ones that differ per post
+useHead({
+    title: pageTitle,
+    meta: [
+        { property: 'og:title', content: pageTitle },
+        { property: 'og:url', content: pageUrl },
+        { property: 'og:image', content: `${SITE_URL}${PROFILE_DATA.avatarUrl}` },
+        { name: 'twitter:card', content: 'summary' },
+    ],
+    link: () => pageUrl.value ? [{ rel: 'canonical', href: pageUrl.value }] : [],
+});
 
 onMounted(() => {
     isDarkMode.value = document.documentElement.classList.contains('dark');
+
+    // Done here, not in a route guard, so the page first hydrates as the pre-rendered home page
+    const legacyPath = route.path === '/' && pathForLegacyHash(route.hash);
+    if (legacyPath) router.replace(legacyPath);
 });
 </script>
 
@@ -55,16 +72,19 @@ onMounted(() => {
                 <!-- Main Content -->
                 <div class="lg:col-span-9">
                     <!-- Navigation -->
-                    <Navigation :active-tab="activeTab" :nav-items="navItems" @nav-click="handleNavClick" />
+                    <Navigation :active-tab="activeTab" :nav-items="navItems" />
 
                     <!-- Content Area -->
                     <main class="min-h-[500px]">
                         <RouterView />
                     </main>
 
-                    <Footer :name="PROFILE_DATA.name" />
+                    <Footer :name="PROFILE_DATA.name" :socials="PROFILE_DATA.socials" />
                 </div>
             </div>
         </div>
+
+        <!-- Loads Google Analytics, asking European visitors first -->
+        <ConsentBanner />
     </div>
 </template>

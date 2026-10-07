@@ -8,7 +8,7 @@ This is a personal portfolio website built with Vue 3, TypeScript, and Vite. It 
 - **Build Tool:** [Vite](https://vitejs.dev/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Icons:** [Lucide Vue](https://lucide.dev/)
+- **Icons:** [Lucide](https://lucide.dev/)
 - **Markdown:** [Marked](https://marked.js.org/)
 
 ## Project Structure
@@ -17,7 +17,11 @@ This is a personal portfolio website built with Vue 3, TypeScript, and Vite. It 
 - `src/data.ts`: Contains the static data for the portfolio content.
 - `src/types.ts`: TypeScript interfaces for the data structures.
 - `src/posts/`: Blog posts, one Markdown file per post. The file name is the post URL (`src/posts/my-post.md` is served at `/blog/my-post`).
-- `src/views/`: The home page (tabs) and the blog post page.
+- `src/router.ts`: One page per tab (`/career`, `/projects`, ...), plus the blog post and 404 pages.
+- `src/navigation.ts`: The tabs shown in the navigation bar and the URL of each.
+- `src/views/`: The blog post page and the 404 page.
+- `src/analytics.ts`: Google Analytics, loaded only after consent for visitors in a European time zone.
+- `src/style.css`: Tailwind CSS setup (Tailwind 4 is configured here, not in a config file).
 - `src/App.vue`: The main application component.
 
 ## Getting Started
@@ -73,13 +77,14 @@ excerpt: One or two sentences shown in the post list and in link previews.
 Post content in Markdown. Fenced code blocks with a language are syntax highlighted.
 ```
 
-The build pre-renders each post to its own static page using [vite-ssg](https://github.com/antfu-collective/vite-ssg).
+The build pre-renders every tab and each post to its own static page using [vite-ssg](https://github.com/antfu-collective/vite-ssg).
 
 ## Customization
 
 - Update `src/data.sensitive.ts` to change the content (Profile, Timeline, Projects, etc.) and update it in your github action repository secrets as well.
 - Modify components in `src/components/` to adjust the layout or design.
-- Update `index.html` for SEO and meta tags.
+- Update `index.html` for the default description and meta tags. Per-page titles and link-preview tags are set in `src/App.vue`.
+- Talk dates in `src/data.sensitive.ts` are written as year and month, e.g. `"2026-01"`.
 
 
 ## Sensitive Data Configuration

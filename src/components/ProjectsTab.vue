@@ -1,44 +1,29 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { ExternalLink, GitPullRequest, Laptop } from 'lucide-vue-next';
+import { ExternalLink, GitPullRequest, Laptop } from '@lucide/vue';
+import SegmentedControl from './SegmentedControl.vue';
 import type { Project } from '../types';
 
 const props = defineProps<{
     projects: Project[];
 }>();
 
-const activeFilter = ref<'Repositories' | 'Pull Requests'>('Repositories');
+const filters = [
+    { value: 'Repositories', tag: 'Repository', icon: Laptop },
+    { value: 'Pull Requests', tag: 'Pull Request', icon: GitPullRequest },
+] as const;
+const activeFilter = ref<typeof filters[number]['value']>('Repositories');
 
 const filteredProjects = computed(() => {
-    return props.projects.filter(p => {
-        if (activeFilter.value === 'Repositories') return p.tags.includes('Repository');
-        if (activeFilter.value === 'Pull Requests') return p.tags.includes('Pull Request');
-        return true;
-    });
+    const tag = filters.find(f => f.value === activeFilter.value)!.tag;
+    return props.projects.filter(p => p.tags.includes(tag));
 });
 </script>
 
 <template>
     <div class="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <!-- Sub-tabs -->
-        <div class="flex p-1 bg-neutral-100 dark:bg-neutral-900 rounded-xl w-fit mx-auto border border-neutral-200 dark:border-neutral-800">
-            <button @click="activeFilter = 'Repositories'"
-                class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
-                :class="activeFilter === 'Repositories' 
-                    ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' 
-                    : 'text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200'">
-                <Laptop :size="16" />
-                Repositories
-            </button>
-            <button @click="activeFilter = 'Pull Requests'"
-                class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
-                :class="activeFilter === 'Pull Requests' 
-                    ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' 
-                    : 'text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200'">
-                <GitPullRequest :size="16" />
-                Pull Requests
-            </button>
-        </div>
+        <h2 class="sr-only">Projects</h2>
+        <SegmentedControl v-model="activeFilter" :options="filters" />
 
         <!-- Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">

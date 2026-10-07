@@ -1,12 +1,14 @@
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { copyFileSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { basename, join } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import tailwindcss from '@tailwindcss/vite'
 import { Marked } from 'marked'
 import { bundledLanguages, codeToHtml } from 'shiki'
 import type { ViteSSGOptions } from 'vite-ssg'
 
 const POSTS_DIR = 'src/posts'
+const NOT_FOUND = '/404'
 
 // Code blocks are highlighted here, at build time, so no highlighter ships to the browser
 const marked = new Marked({
@@ -55,23 +57,29 @@ function posts(): Plugin {
 
 const postFiles = () => readdirSync(POSTS_DIR).filter((file) => file.endsWith('.md'))
 
+// Every pre-rendered URL, filled in by includedRoutes
+let pages: string[] = []
+
 const ssgOptions: ViteSSGOptions = {
   // One static page per post, so each has its own URL on GitHub Pages
-  includedRoutes: (paths) => paths.flatMap((path) =>
-    path === '/blog/:slug'
-      ? postFiles().map((file) => `/blog/${basename(file, '.md')}`)
-      : path),
-  // List the home page and every post in sitemap.xml so search engines can find them
+  includedRoutes: (paths) => pages = paths.flatMap((path) => {
+    if (path === '/blog/:slug') return postFiles().map((file) => `/blog/${basename(file, '.md')}`)
+    // The catch-all route becomes 404.html
+    return path.includes(':') ? NOT_FOUND : path
+  }),
   onFinished() {
+    // /blog is both a page (blog.html) and a folder of posts. Also serve the page from inside
+    // the folder, in case the host resolves /blog to the folder first.
+    copyFileSync('dist/blog.html', 'dist/blog/index.html')
+
+    // List every page in sitemap.xml so search engines can find them
     const siteUrl = `https://${readFileSync('public/CNAME', 'utf8').trim()}`
-    const urls = [
-      `<url><loc>${siteUrl}/</loc></url>`,
-      ...postFiles().map((file) => {
-        const date = /^date:\s*(.+)$/m.exec(readFileSync(join(POSTS_DIR, file), 'utf8'))?.[1].trim()
-        const lastmod = date ? `<lastmod>${date}</lastmod>` : ''
-        return `<url><loc>${siteUrl}/blog/${basename(file, '.md')}</loc>${lastmod}</url>`
-      }),
-    ]
+    const urls = pages.filter((path) => path !== NOT_FOUND).map((path) => {
+      const post = /^\/blog\/(.+)$/.exec(path)?.[1]
+      const date = post && /^date:\s*(.+)$/m.exec(readFileSync(join(POSTS_DIR, `${post}.md`), 'utf8'))?.[1].trim()
+      const lastmod = date ? `<lastmod>${date}</lastmod>` : ''
+      return `<url><loc>${siteUrl}${path}</loc>${lastmod}</url>`
+    })
     writeFileSync(
       'dist/sitemap.xml',
       `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`,
@@ -81,7 +89,7 @@ const ssgOptions: ViteSSGOptions = {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), posts()],
+  plugins: [vue(), tailwindcss(), posts()],
   base: '/',
   ssgOptions,
 })

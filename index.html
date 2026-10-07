@@ -14,20 +14,17 @@
   <meta property="og:title" content="Ashwin Phadke | Portfolio" />
   <meta property="og:description"
     content="Portfolio of Ashwin Phadke, specializing in building scalable AI products and research." />
-  <meta property="og:image" content="/profile.jpeg" />
+  <meta property="og:image" content="https://ashwinphadke.com/profile.jpeg" />
+  <meta name="twitter:card" content="summary" />
 
-  <!-- Apply the dark theme before first paint -->
+  <!-- Apply the dark theme before first paint: the visitor's saved choice, else their OS setting -->
   <script>
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
-  </script>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H7SK0FEHQM"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-H7SK0FEHQM');
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) { }
+      var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (dark) document.documentElement.classList.add('dark');
+    })();
   </script>
 </head>
 

@@ -1,4 +1,4 @@
-import { onMounted, ref, watch } from 'vue';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import {
     User,
@@ -9,38 +9,27 @@ import {
     Heart,
     Mic,
     Award
-} from 'lucide-vue-next';
+} from '@lucide/vue';
 
+// Each id is also the name of the tab's route
 export const navItems = [
-    { id: 'about', icon: User, label: 'About' },
-    { id: 'experience', icon: Briefcase, label: 'Career' },
-    { id: 'projects', icon: Code2, label: 'Projects' },
-    { id: 'volunteer', icon: Heart, label: 'Volunteer' },
-    { id: 'awards', icon: Award, label: 'Achievements' },
-    { id: 'blog', icon: BookOpen, label: 'Blog' },
-    { id: 'talks', icon: Mic, label: 'Talks' },
-    { id: 'contact', icon: Mail, label: 'Contact' }
+    { id: 'about', path: '/', icon: User, label: 'About' },
+    { id: 'experience', path: '/career', icon: Briefcase, label: 'Career' },
+    { id: 'projects', path: '/projects', icon: Code2, label: 'Projects' },
+    { id: 'volunteer', path: '/volunteer', icon: Heart, label: 'Volunteer' },
+    { id: 'awards', path: '/achievements', icon: Award, label: 'Achievements' },
+    { id: 'blog', path: '/blog', icon: BookOpen, label: 'Blog' },
+    { id: 'talks', path: '/talks', icon: Mic, label: 'Talks' },
+    { id: 'contact', path: '/contact', icon: Mail, label: 'Contact' }
 ];
 
 export const useActiveTab = () => {
     const route = useRoute();
+    return computed(() => route.name === 'post' ? 'blog' : String(route.name));
+};
 
-    const tabFromRoute = () => {
-        if (route.name === 'post') return 'blog';
-        const rawHash = route.hash.replace('#', '');
-        const hash = rawHash === 'work' ? 'projects' : rawHash;
-        return navItems.some(n => n.id === hash) ? hash : 'about';
-    };
-
-    // The pre-rendered HTML can't see the URL hash, so start from what it rendered
-    // and only read the hash once mounted
-    const activeTab = ref(route.name === 'post' ? 'blog' : 'about');
-    onMounted(() => {
-        activeTab.value = tabFromRoute();
-    });
-    watch(() => route.fullPath, () => {
-        activeTab.value = tabFromRoute();
-    });
-
-    return activeTab;
+// Tabs used to be hashes on the home page (/#projects); returns the page such a link now points to
+export const pathForLegacyHash = (hash: string) => {
+    const id = hash.replace('#', '');
+    return navItems.find(n => n.id === (id === 'work' ? 'projects' : id))?.path;
 };

@@ -31,7 +31,8 @@ export interface Talk {
   title: string;
   event: string;
   link: string;
-  date?: string;
+  /** Year and month, e.g. "2026-01" */
+  date?: `${number}-${number}`;
 }
 
 export interface BlogPost {
@@ -76,8 +77,6 @@ export interface ProfileData {
   experience: Experience[];
   testimonials: Testimonial[];
   talks: Talk[];
-  /** @deprecated Posts now live in src/posts/*.md. Kept so an older data.sensitive.ts still builds. */
-  blogPosts?: unknown[];
   volunteer: VolunteerExperience[];
   awards: Award[];
   certificates: Certificate[];
