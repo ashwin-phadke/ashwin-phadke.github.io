@@ -14,7 +14,7 @@ defineProps<{
             <div class="absolute w-4 h-4 bg-neutral-900 dark:bg-neutral-100 rounded-full -left-[9px] top-1" />
             <div class="flex justify-between items-start mb-2">
                 <h3 class="text-xl font-bold">{{ role.company }}</h3>
-                <span class="text-neutral-400 font-mono text-sm">{{ role.period }}</span>
+                <span class="text-neutral-400 font-semibold text-sm">{{ role.period }}</span>
             </div>
             <div class="flex items-baseline gap-2 mb-4">
                 <h4 class="text-lg text-neutral-500 leading-none">{{ role.role }}</h4>

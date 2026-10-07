@@ -33,7 +33,7 @@ defineProps<{
                                 </div>
                             </div>
                         </div>
-                        <span class="text-neutral-400 font-mono text-sm leading-7">{{ role.period }}</span>
+                        <span class="text-neutral-400 font-semibold text-sm leading-7">{{ role.period }}</span>
                     </div>
                     
                     <div v-if="Array.isArray(role.description)" class="space-y-2">
@@ -55,7 +55,7 @@ defineProps<{
                             <span>{{ job.location }}</span>
                         </div>
                     </div>
-                    <span class="text-neutral-400 font-mono text-sm leading-7">{{ job.period }}</span>
+                    <span class="text-neutral-400 font-semibold text-sm leading-7">{{ job.period }}</span>
                 </div>
                 <div v-if="Array.isArray(job.description)" class="space-y-2">
                     <ul class="list-disc list-inside text-neutral-600 dark:text-neutral-400 max-w-2xl space-y-1">
