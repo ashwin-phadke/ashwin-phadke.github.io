@@ -5,7 +5,6 @@ import {
     Briefcase,
     BookOpen,
     Mail,
-    Heart,
     Mic
 } from '@lucide/vue';
 
@@ -13,7 +12,6 @@ import {
 export const navItems = [
     { id: 'about', path: '/', icon: User, label: 'About' },
     { id: 'experience', path: '/career', icon: Briefcase, label: 'Career' },
-    { id: 'volunteer', path: '/volunteer', icon: Heart, label: 'Volunteer' },
     { id: 'blog', path: '/blog', icon: BookOpen, label: 'Blog' },
     { id: 'talks', path: '/talks', icon: Mic, label: 'Talks' },
     { id: 'contact', path: '/contact', icon: Mail, label: 'Contact' }

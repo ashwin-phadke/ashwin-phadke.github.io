@@ -2,10 +2,11 @@
 import { MapPin } from '@lucide/vue';
 import TimelineItem from './TimelineItem.vue';
 import RoleDescription from './RoleDescription.vue';
-import type { Experience } from '../types';
+import type { Experience, VolunteerExperience } from '../types';
 
 defineProps<{
     experience: Experience[];
+    volunteer: VolunteerExperience[];
 }>();
 </script>
 
@@ -53,5 +54,23 @@ defineProps<{
                 <RoleDescription :description="job.description" />
             </div>
         </TimelineItem>
+
+        <!-- Volunteering: a plain list, lighter than the work timeline above -->
+        <section v-if="volunteer.length > 0" class="pt-12 border-t border-neutral-200 dark:border-neutral-800">
+            <h2 class="text-sm font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-8">
+                Volunteering</h2>
+            <ul class="space-y-8">
+                <li v-for="(v, idx) in volunteer" :key="idx">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-x-6 mb-1">
+                        <h3 class="text-lg font-semibold">{{ v.company }}</h3>
+                        <span class="text-neutral-500 dark:text-neutral-400 font-semibold text-sm shrink-0">{{ v.period }}</span>
+                    </div>
+                    <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-2">
+                        {{ v.role }}<template v-if="v.location"> · {{ v.location }}</template>
+                    </p>
+                    <RoleDescription :description="v.description" class="text-sm" />
+                </li>
+            </ul>
+        </section>
     </div>
 </template>
