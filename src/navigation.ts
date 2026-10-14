@@ -6,8 +6,7 @@ import {
     BookOpen,
     Mail,
     Heart,
-    Mic,
-    Award
+    Mic
 } from '@lucide/vue';
 
 // Each id is also the name of the tab's route
@@ -15,7 +14,6 @@ export const navItems = [
     { id: 'about', path: '/', icon: User, label: 'About' },
     { id: 'experience', path: '/career', icon: Briefcase, label: 'Career' },
     { id: 'volunteer', path: '/volunteer', icon: Heart, label: 'Volunteer' },
-    { id: 'awards', path: '/achievements', icon: Award, label: 'Achievements' },
     { id: 'blog', path: '/blog', icon: BookOpen, label: 'Blog' },
     { id: 'talks', path: '/talks', icon: Mic, label: 'Talks' },
     { id: 'contact', path: '/contact', icon: Mail, label: 'Contact' }
