@@ -5,7 +5,6 @@ import {
     Briefcase,
     BookOpen,
     Mail,
-    Code2,
     Heart,
     Mic,
     Award
@@ -15,7 +14,6 @@ import {
 export const navItems = [
     { id: 'about', path: '/', icon: User, label: 'About' },
     { id: 'experience', path: '/career', icon: Briefcase, label: 'Career' },
-    { id: 'projects', path: '/projects', icon: Code2, label: 'Projects' },
     { id: 'volunteer', path: '/volunteer', icon: Heart, label: 'Volunteer' },
     { id: 'awards', path: '/achievements', icon: Award, label: 'Achievements' },
     { id: 'blog', path: '/blog', icon: BookOpen, label: 'Blog' },
@@ -28,8 +26,8 @@ export const useActiveTab = () => {
     return computed(() => route.name === 'post' ? 'blog' : String(route.name));
 };
 
-// Tabs used to be hashes on the home page (/#projects); returns the page such a link now points to
+// Tabs used to be hashes on the home page (/#experience); returns the page such a link now points to
 export const pathForLegacyHash = (hash: string) => {
     const id = hash.replace('#', '');
-    return navItems.find(n => n.id === (id === 'work' ? 'projects' : id))?.path;
+    return navItems.find(n => n.id === id)?.path;
 };

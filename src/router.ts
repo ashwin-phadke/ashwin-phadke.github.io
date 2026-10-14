@@ -1,7 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 import AboutTab from './components/AboutTab.vue';
 import ExperienceTab from './components/ExperienceTab.vue';
-import ProjectsTab from './components/ProjectsTab.vue';
 import VolunteerTab from './components/VolunteerTab.vue';
 import AwardsTab from './components/AwardsTab.vue';
 import BlogTab from './components/BlogTab.vue';
@@ -16,7 +15,6 @@ import { posts } from './posts';
 export const routes: RouteRecordRaw[] = [
     { path: '/', name: 'about', component: AboutTab, props: { profile: PROFILE_DATA } },
     { path: '/career', name: 'experience', component: ExperienceTab, props: { experience: PROFILE_DATA.experience } },
-    { path: '/projects', name: 'projects', component: ProjectsTab, props: { projects: PROFILE_DATA.projects } },
     { path: '/volunteer', name: 'volunteer', component: VolunteerTab, props: { volunteer: PROFILE_DATA.volunteer } },
     {
         path: '/achievements', name: 'awards', component: AwardsTab,

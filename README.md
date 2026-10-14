@@ -13,11 +13,11 @@ This is a personal portfolio website built with Vue 3, TypeScript, and Vite. It 
 
 ## Project Structure
 
-- `src/components/`: Contains the Vue components for different sections of the portfolio (About, Experience, Work, etc.).
+- `src/components/`: Contains the Vue components for different sections of the portfolio (About, Experience, Blog, etc.).
 - `src/data.ts`: Contains the static data for the portfolio content.
 - `src/types.ts`: TypeScript interfaces for the data structures.
 - `src/posts/`: Blog posts, one Markdown file per post. The file name is the post URL (`src/posts/my-post.md` is served at `/blog/my-post`).
-- `src/router.ts`: One page per tab (`/career`, `/projects`, ...), plus the blog post and 404 pages.
+- `src/router.ts`: One page per tab (`/career`, `/blog`, ...), plus the blog post and 404 pages.
 - `src/navigation.ts`: The tabs shown in the navigation bar and the URL of each.
 - `src/views/`: The blog post page and the 404 page.
 - `src/analytics.ts`: Google Analytics, loaded only after consent for visitors in a European time zone.
