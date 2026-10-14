@@ -4,6 +4,7 @@ import { useHead } from '@unhead/vue';
 import { ArrowLeft } from '@lucide/vue';
 import { formatDate } from '../dates';
 import { findPost } from '../posts';
+import { SITE_URL } from '../data';
 import NotFoundView from './NotFoundView.vue';
 
 const props = defineProps<{
@@ -12,13 +13,19 @@ const props = defineProps<{
 
 const post = computed(() => findPost(props.slug));
 
-// Per-post description and link-preview tags; the title, URL and image are set in App.vue
+// Per-post description and link-preview tags; the title and URL are set in App.vue.
+// The image is generated for each post at build time, in vite.config.ts.
 useHead({
     meta: [
         { name: 'description', content: () => post.value?.excerpt },
         { property: 'og:type', content: 'article' },
         { property: 'og:title', content: () => post.value?.title },
         { property: 'og:description', content: () => post.value?.excerpt },
+        { property: 'og:image', content: () => post.value && `${SITE_URL}/og/${post.value.slug}.png` },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:alt', content: () => post.value?.title },
+        { name: 'twitter:card', content: 'summary_large_image' },
     ],
 });
 </script>
