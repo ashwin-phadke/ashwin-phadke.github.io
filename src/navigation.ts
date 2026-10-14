@@ -13,7 +13,7 @@ export const navItems = [
     { id: 'about', path: '/', icon: User, label: 'About' },
     { id: 'experience', path: '/career', icon: Briefcase, label: 'Career' },
     { id: 'blog', path: '/blog', icon: BookOpen, label: 'Blog' },
-    { id: 'talks', path: '/talks', icon: Mic, label: 'Talks' },
+    { id: 'talks', path: '/talks', icon: Mic, label: 'Tech Talks' },
     { id: 'contact', path: '/contact', icon: Mail, label: 'Contact' }
 ];
 

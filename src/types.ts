@@ -30,6 +30,8 @@ export interface Testimonial {
 export interface Talk {
   title: string;
   event: string;
+  /** One line on what the talk covered */
+  description?: string;
   link: string;
   /** Year and month, e.g. "2026-01" */
   date?: `${number}-${number}`;

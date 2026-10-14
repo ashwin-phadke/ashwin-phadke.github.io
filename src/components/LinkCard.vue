@@ -7,6 +7,7 @@ defineProps<{
     icon: Component;
     label: string;
     title: string;
+    description?: string;
     date?: string;
 }>();
 </script>
@@ -24,6 +25,7 @@ defineProps<{
                 <h3 class="text-xl font-bold group-hover:underline decoration-neutral-400 decoration-2 underline-offset-4">
                     {{ title }}
                 </h3>
+                <p v-if="description" class="text-neutral-600 dark:text-neutral-400 max-w-2xl">{{ description }}</p>
                 <div v-if="date" class="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
                     <Calendar :size="14" />
                     <span>{{ date }}</span>
