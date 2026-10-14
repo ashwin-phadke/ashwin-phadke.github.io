@@ -1,6 +1,6 @@
 # Ashwin Phadke | Portfolio
 
-This is a personal portfolio website built with Vue 3, TypeScript, and Vite. It showcases my professional experience, projects, talks, and blog posts.
+This is a personal portfolio website built with Vue 3, TypeScript, and Vite. It showcases my professional experience, volunteering, tech talks, and blog posts.
 
 ## Tech Stack
 
@@ -77,14 +77,14 @@ excerpt: One or two sentences shown in the post list and in link previews.
 Post content in Markdown. Fenced code blocks with a language are syntax highlighted.
 ```
 
-The build pre-renders every tab and each post to its own static page using [vite-ssg](https://github.com/antfu-collective/vite-ssg).
+The build pre-renders every tab and each post to its own static page using [vite-ssg](https://github.com/antfu-collective/vite-ssg). It also generates a link-preview image for each post (`dist/og/<post>.png`) from its category and title, so there is no image to make by hand.
 
 ## Customization
 
-- Update `src/data.sensitive.ts` to change the content (Profile, Timeline, Projects, etc.) and update it in your github action repository secrets as well.
+- Update `src/data.sensitive.ts` to change the content (profile, career, volunteering, talks), then update the `DATA_SENSITIVE_FILE` repository secret and re-run the deploy. The live site is built from the secret, so until then it keeps showing the old content even after a push.
 - Modify components in `src/components/` to adjust the layout or design.
 - Update `index.html` for the default description and meta tags. Per-page titles and link-preview tags are set in `src/App.vue`.
-- Talk dates in `src/data.sensitive.ts` are written as year and month, e.g. `"2026-01"`.
+- Talk dates in `src/data.sensitive.ts` are written as year and month, e.g. `"2026-01"`. Each talk can also have a one-line `description`, shown under its title.
 
 
 ## Sensitive Data Configuration
