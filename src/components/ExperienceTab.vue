@@ -21,8 +21,8 @@ defineProps<{
                     <div v-if="rIdx !== job.roles.length - 1"
                         class="absolute left-[-23px] top-[28px] bottom-[-20px] w-0.5 bg-neutral-200 dark:bg-neutral-800" />
 
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="flex items-baseline gap-2">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-x-6 gap-y-1 mb-2">
+                        <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                             <h4 class="text-lg text-neutral-800 dark:text-neutral-200 font-semibold leading-none">
                                 {{ role.role }}</h4>
                             <div v-if="role.location"
@@ -31,7 +31,7 @@ defineProps<{
                                 <span>{{ role.location }}</span>
                             </div>
                         </div>
-                        <span class="text-neutral-500 dark:text-neutral-400 font-semibold text-sm leading-7">{{ role.period }}</span>
+                        <span class="text-neutral-500 dark:text-neutral-400 font-semibold text-sm sm:leading-7 whitespace-nowrap">{{ role.period }}</span>
                     </div>
 
                     <RoleDescription :description="role.description" />
@@ -40,16 +40,16 @@ defineProps<{
 
             <!-- Single Role -->
             <div v-else>
-                <div class="flex justify-between items-start mb-2">
-                    <div class="flex items-baseline gap-2">
-                        <h4 class="text-lg text-neutral-500 dark:text-neutral-400 mb-4 leading-none">{{ job.role }}</h4>
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-x-6 gap-y-1 mb-4">
+                    <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                        <h4 class="text-lg text-neutral-500 dark:text-neutral-400 leading-none">{{ job.role }}</h4>
                         <div v-if="job.location"
                             class="flex items-center gap-1 text-neutral-500 dark:text-neutral-400 text-sm">
                             <MapPin :size="12" class="translate-y-[1px]" />
                             <span>{{ job.location }}</span>
                         </div>
                     </div>
-                    <span class="text-neutral-500 dark:text-neutral-400 font-semibold text-sm leading-7">{{ job.period }}</span>
+                    <span class="text-neutral-500 dark:text-neutral-400 font-semibold text-sm sm:leading-7 whitespace-nowrap">{{ job.period }}</span>
                 </div>
                 <RoleDescription :description="job.description" />
             </div>
@@ -68,7 +68,8 @@ defineProps<{
                     <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-2">
                         {{ v.role }}<template v-if="v.location"> · {{ v.location }}</template>
                     </p>
-                    <RoleDescription :description="v.description" class="text-sm" />
+                    <!-- Always a paragraph, so entries look alike whether their data has points or not -->
+                    <RoleDescription :description="[v.description].flat().join(' ')" class="text-sm" />
                 </li>
             </ul>
         </section>
