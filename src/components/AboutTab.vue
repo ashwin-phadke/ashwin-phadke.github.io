@@ -16,14 +16,6 @@ defineProps<{
             </div>
         </div>
 
-        <h3 class="text-sm font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-6">Domains</h3>
-        <div class="flex flex-wrap gap-2 mb-16">
-            <span v-for="skill in profile.skills" :key="skill"
-                class="px-3 py-1 bg-neutral-200 dark:bg-neutral-900 rounded-full text-sm font-medium">
-                {{ skill }}
-            </span>
-        </div>
-
         <div v-if="profile.testimonials.length > 0">
             <h3 class="text-sm font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-6">Kind Words
             </h3>
