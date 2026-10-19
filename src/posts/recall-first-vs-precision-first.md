@@ -42,7 +42,7 @@ This is the decision threshold from the confusion matrix again. Lowering it lets
 In the recall-first setting, pull a large candidate set and set the threshold low. The cost is volume, and volume is something the next stage can handle. In the precision-first setting, a small candidate set and a high threshold keep the context short and clean, which matters because everything retrieved is handed to a model that will try to use it.
 
 ### Query expansion
-Collections in eDiscovery are written by people who were not trying to be found: nicknames, abbreviations, project code names, misspellings. Expanding the query with synonyms and variants catches documents the original wording would miss. Each expansion also brings in noise, which is acceptable here.
+Collections in eDiscovery are written by people who never expected them to be searched: they wrote for colleagues who already knew the context, so the text is full of nicknames, abbreviations, project code names and misspellings. Expanding the query with synonyms and variants catches documents the original wording would miss. Each expansion also brings in noise, which is acceptable here.
 
 In legal research the same expansion causes drift. A query about one doctrine widens into its neighbours, and the top results fill with cases that are related but not on point. Keep the query close to the issue as stated. That doesn't rule expansion out: normalising abbreviations and citation formats helps, and broader expansion is safe if a strict reranker makes the final cut.
 
