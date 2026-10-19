@@ -64,7 +64,7 @@ npm run preview
 
 ## Writing a Blog Post
 
-Add a Markdown file to `src/posts/` starting with this block (`date` is optional):
+Add a Markdown file to `src/posts/` starting with this block (`date` and `related` are optional):
 
 ```markdown
 ---
@@ -72,12 +72,15 @@ title: My post title
 date: 2026-01-31
 category: Machine Learning
 excerpt: One or two sentences shown in the post list and in link previews.
+related: other-post-slug, another-post-slug
 ---
 
 Post content in Markdown. Fenced code blocks with a language are syntax highlighted.
 ```
 
 The build pre-renders every tab and each post to its own static page using [vite-ssg](https://github.com/antfu-collective/vite-ssg). It also generates a link-preview image for each post (`dist/og/<post>.png`) from its category and title, so there is no image to make by hand.
+
+Each post ends with three suggested reads: the posts named in `related` (by file name, without `.md`) first, then posts in the same category, then the newest of the rest. A misspelt name in `related` fails the build.
 
 ## Customization
 

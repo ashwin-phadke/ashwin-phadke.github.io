@@ -2,6 +2,7 @@
 title: Understanding the confusion matrix in a simple way
 category: Machine Learning
 excerpt: Accuracy alone can make a useless classifier look great. The confusion matrix shows where a model is actually right and wrong, and which mistakes it makes.
+related: recall-first-vs-precision-first, an-ediscovery-agent-should-leave-a-trail
 ---
 
 A classifier can be highly accurate and still be useless. The confusion matrix is the simplest tool for seeing why, because it shows not just how often a model is wrong but which kind of wrong it is.

@@ -44,6 +44,8 @@ export interface BlogPost {
   excerpt: string;
   html: string;
   date?: string;
+  /** Slugs of posts to suggest first at the end of this one */
+  related?: string[];
 }
 
 export interface Socials {

@@ -60,7 +60,13 @@ function posts(): Plugin {
         if (!parsed.meta[field]) return this.error(`${id}: frontmatter is missing "${field}"`)
       }
 
-      const post = { slug: basename(id, '.md'), ...parsed.meta, html: await marked.parse(parsed.body) }
+      // "related: slug-a, slug-b" becomes a list, and a typo fails the build instead of a missing suggestion
+      const related = parsed.meta.related?.split(',').map((slug) => slug.trim()).filter(Boolean)
+      const slugs = postFiles().map((file) => basename(file, '.md'))
+      const unknown = related?.find((slug) => !slugs.includes(slug))
+      if (unknown) return this.error(`${id}: related post "${unknown}" does not exist`)
+
+      const post = { slug: basename(id, '.md'), ...parsed.meta, related, html: await marked.parse(parsed.body) }
       return { code: `export default ${JSON.stringify(post)}`, map: null }
     },
   }

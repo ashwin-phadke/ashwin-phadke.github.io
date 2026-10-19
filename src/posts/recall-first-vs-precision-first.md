@@ -3,6 +3,7 @@ title: Recall-first vs precision-first: tuning the same RAG pipeline for eDiscov
 date: 2026-10-05
 category: Retrieval
 excerpt: eDiscovery and legal research can run on the same hybrid retrieval pipeline, but they want opposite things from it. One cannot afford to miss a document, the other cannot afford to show a wrong one.
+related: understanding-the-confusion-matrix, an-ediscovery-agent-should-leave-a-trail
 ---
 
 A hybrid retrieval pipeline has the same parts whatever you use it for: a keyword index, an embedding index, a way to merge the two, and usually a reranker. I have worked on that pipeline for both eDiscovery and legal research, and the two pull its settings in different directions. The reason is the trade-off from the confusion matrix: which mistake costs more.

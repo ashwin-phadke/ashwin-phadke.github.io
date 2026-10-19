@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useHead } from '@unhead/vue';
 import { ArrowLeft } from '@lucide/vue';
 import { formatDate } from '../dates';
-import { findPost } from '../posts';
+import { findPost, suggestedPosts } from '../posts';
 import { SITE_URL } from '../data';
 import NotFoundView from './NotFoundView.vue';
 
@@ -12,6 +12,7 @@ const props = defineProps<{
 }>();
 
 const post = computed(() => findPost(props.slug));
+const suggestions = computed(() => post.value ? suggestedPosts(post.value) : []);
 
 // Per-post description and link-preview tags; the title and URL are set in App.vue.
 // The image is generated for each post at build time, in vite.config.ts.
@@ -43,5 +44,20 @@ useHead({
         </div>
         <h1 class="text-4xl font-bold mb-10">{{ post.title }}</h1>
         <div class="prose prose-neutral dark:prose-invert max-w-none" v-html="post.html"></div>
+        <aside v-if="suggestions.length" class="mt-20 pt-12 border-t border-neutral-200 dark:border-neutral-800">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-8">
+                Suggested reads</h2>
+            <div class="space-y-10">
+                <RouterLink v-for="other in suggestions" :key="other.slug" :to="`/blog/${other.slug}`"
+                    class="group block">
+                    <div class="text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">
+                        {{ other.category }}</div>
+                    <h3
+                        class="text-xl font-bold mb-2 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
+                        {{ other.title }}</h3>
+                    <p class="text-neutral-500 dark:text-neutral-400 leading-relaxed">{{ other.excerpt }}</p>
+                </RouterLink>
+            </div>
+        </aside>
     </article>
 </template>
