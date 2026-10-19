@@ -28,6 +28,8 @@ const toggleDarkMode = () => {
 };
 
 const pageTitle = computed(() => {
+    // The home page is what a search for the name lands on, so it leads with the name and role
+    if (route.name === 'about') return `${PROFILE_DATA.name} | Sr Manager, AI/ML`;
     const post = route.name === 'post' ? findPost(String(route.params.slug)) : undefined;
     const label = post?.title ?? navItems.find(n => n.id === activeTab.value)?.label;
     return `${label ?? 'Page not found'} | ${PROFILE_DATA.name}`;
