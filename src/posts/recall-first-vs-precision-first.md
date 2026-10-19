@@ -44,7 +44,7 @@ In the recall-first setting, pull a large candidate set and set the threshold lo
 ### Query expansion
 Collections in eDiscovery are written by people who were not trying to be found: nicknames, abbreviations, project code names, misspellings. Expanding the query with synonyms and variants catches documents the original wording would miss. Each expansion also brings in noise, which is acceptable here.
 
-In legal research the same expansion causes drift. A query about one doctrine widens into its neighbours, and the top results fill with cases that are related but not on point. Keep the query close to the issue as stated.
+In legal research the same expansion causes drift. A query about one doctrine widens into its neighbours, and the top results fill with cases that are related but not on point. Keep the query close to the issue as stated. That doesn't rule expansion out: normalising abbreviations and citation formats helps, and broader expansion is safe if a strict reranker makes the final cut.
 
 ### What the reranker is for
 The reranker is the same model in both pipelines and does a different job in each. In eDiscovery it does not remove anything. It **orders** the candidates so the most likely relevant documents are reviewed first. In legal research it **filters**: score the candidates, keep the top few, discard the rest.
