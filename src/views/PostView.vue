@@ -44,20 +44,21 @@ useHead({
         </div>
         <h1 class="text-4xl font-bold mb-10">{{ post.title }}</h1>
         <div class="prose prose-neutral dark:prose-invert max-w-none" v-html="post.html"></div>
-        <aside v-if="suggestions.length" class="mt-20 pt-12 border-t border-neutral-200 dark:border-neutral-800">
-            <h2 class="text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-8">
+        <!-- Kept small and muted so it reads as navigation, not as more of the post -->
+        <aside v-if="suggestions.length" class="mt-24 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-4">
                 Suggested reads</h2>
-            <div class="space-y-10">
-                <RouterLink v-for="other in suggestions" :key="other.slug" :to="`/blog/${other.slug}`"
-                    class="group block">
-                    <div class="text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">
-                        {{ other.category }}</div>
-                    <h3
-                        class="text-xl font-bold mb-2 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
-                        {{ other.title }}</h3>
-                    <p class="text-neutral-500 dark:text-neutral-400 leading-relaxed">{{ other.excerpt }}</p>
-                </RouterLink>
-            </div>
+            <ul class="space-y-3">
+                <li v-for="other in suggestions" :key="other.slug">
+                    <RouterLink :to="`/blog/${other.slug}`"
+                        class="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-x-6 gap-y-1 text-sm">
+                        <span
+                            class="text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">
+                            {{ other.title }}</span>
+                        <span class="shrink-0 text-xs text-neutral-400 dark:text-neutral-500">{{ other.category }}</span>
+                    </RouterLink>
+                </li>
+            </ul>
         </aside>
     </article>
 </template>
