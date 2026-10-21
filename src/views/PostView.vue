@@ -4,7 +4,7 @@ import { useHead } from '@unhead/vue';
 import { ArrowLeft } from '@lucide/vue';
 import { formatDate } from '../dates';
 import { findPost, suggestedPosts } from '../posts';
-import { SITE_URL } from '../data';
+import { PROFILE_DATA, SITE_URL } from '../data';
 import NotFoundView from './NotFoundView.vue';
 
 const props = defineProps<{
@@ -28,6 +28,22 @@ useHead({
         { property: 'og:image:alt', content: () => post.value?.title },
         { name: 'twitter:card', content: 'summary_large_image' },
     ],
+    // Structured data for search engines; the author is the Person described on the home page, in App.vue
+    script: () => post.value ? [{
+        type: 'application/ld+json',
+        key: 'structured-data',
+        innerHTML: {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.value.title,
+            description: post.value.excerpt,
+            ...(post.value.date && { datePublished: post.value.date }),
+            image: `${SITE_URL}/og/${post.value.slug}.png`,
+            url: `${SITE_URL}/blog/${post.value.slug}`,
+            mainEntityOfPage: `${SITE_URL}/blog/${post.value.slug}`,
+            author: { '@type': 'Person', '@id': `${SITE_URL}/#person`, name: PROFILE_DATA.name, url: `${SITE_URL}/` },
+        },
+    }] : [],
 });
 </script>
 

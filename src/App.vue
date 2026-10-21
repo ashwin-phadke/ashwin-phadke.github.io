@@ -27,9 +27,12 @@ const toggleDarkMode = () => {
     } catch { }
 };
 
+// PROFILE_DATA.title is a tagline, so the role used for search results is kept here
+const JOB_TITLE = 'Sr Manager, AI/ML';
+
 const pageTitle = computed(() => {
     // The home page is what a search for the name lands on, so it leads with the name and role
-    if (route.name === 'about') return `${PROFILE_DATA.name} | Sr Manager, AI/ML`;
+    if (route.name === 'about') return `${PROFILE_DATA.name} | ${JOB_TITLE}`;
     const post = route.name === 'post' ? findPost(String(route.params.slug)) : undefined;
     const label = post?.title ?? navItems.find(n => n.id === activeTab.value)?.label;
     return `${label ?? 'Page not found'} | ${PROFILE_DATA.name}`;
@@ -48,6 +51,30 @@ useHead({
         { name: 'twitter:card', content: 'summary' },
     ],
     link: () => pageUrl.value ? [{ rel: 'canonical', href: pageUrl.value }] : [],
+});
+
+// Structured data for search engines: the site's name, and who it belongs to with their other profiles.
+// Posts refer back to this Person by its @id as their author, in PostView.vue.
+useHead({
+    script: () => route.name === 'about' ? [{
+        type: 'application/ld+json',
+        key: 'structured-data',
+        innerHTML: {
+            '@context': 'https://schema.org',
+            '@graph': [
+                { '@type': 'WebSite', '@id': `${SITE_URL}/#website`, name: PROFILE_DATA.name, url: `${SITE_URL}/` },
+                {
+                    '@type': 'Person',
+                    '@id': `${SITE_URL}/#person`,
+                    name: PROFILE_DATA.name,
+                    jobTitle: JOB_TITLE,
+                    url: `${SITE_URL}/`,
+                    image: `${SITE_URL}${PROFILE_DATA.avatarUrl}`,
+                    sameAs: Object.values(PROFILE_DATA.socials).filter(Boolean),
+                },
+            ],
+        },
+    }] : [],
 });
 
 onMounted(() => {
